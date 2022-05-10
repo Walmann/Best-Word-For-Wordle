@@ -95,7 +95,6 @@ with open("wordlistNYTimes.txt", "r") as wordlistFile:
             wordScore = wordScore + letterScore
 
         wordHighScore.append([str(wordScore).zfill(3), lineEntry, wordScoreArray])
-        print()
 
     with open("Result.txt", "w+", encoding="UTF-8") as Results:
         sortetHighScore = sorted(wordHighScore, key=lambda x: x[0], reverse=True)
