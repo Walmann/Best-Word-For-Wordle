@@ -48,3 +48,11 @@ Combine these and you get 83 points.
 # Wich wordlist too choose?
 The original list i used was the `wordlistAllowedGuesses.txt`, but this was changed to `wordlistNYTimes.txt` later. <br />
 But you can use whichever you want.
+
+# In the future
+Some ideas that can be created at a later date:
+1. A solver that gives advice about wich word you should guess next. <br />
+   This could be done like this:
+- Give the top scorring word as suggestion
+- Ask wich letters became green, yellow, and black (in a for loop or something.)
+- Give next suggestion based on this information.
