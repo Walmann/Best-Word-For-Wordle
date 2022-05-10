@@ -44,3 +44,7 @@ Combine these and you get 83 points.
 > EDIT: If the same letter appear twice in a word, the second letter wont account towards the Word Score.
 
 3. Sort this list by Score, and Voila! You have the `Result.csv` file as provided!
+
+# Wich wordlist too choose?
+The original list i used was the `wordlistAllowedGuesses.txt`, but this was changed to `wordlistNYTimes.txt` later. <br />
+But you can use whichever you want.
