@@ -59,11 +59,6 @@ with open("wordlist.txt", "r") as wordlistFile:
     listLetterThree = createTopLetter(letterDict[2])
     listLetterFour = createTopLetter(letterDict[3])
     listLetterFive = createTopLetter(letterDict[4])
-    # print(listLetterOne)
-    # print(listLetterTwo)
-    # print(listLetterThree)
-    # print(listLetterFour)
-    # print(listLetterFive)
     
 
     wordHighScore = []
@@ -71,6 +66,7 @@ with open("wordlist.txt", "r") as wordlistFile:
         lineEntry = lineEntry.strip()
         wordScore = 0
         wordScoreArray = []
+        currentWordContainsLetters = []
         for index, letter in enumerate(lineEntry):
             if index == 0:
                 currentList = listLetterOne
@@ -82,6 +78,13 @@ with open("wordlist.txt", "r") as wordlistFile:
                 currentList = listLetterFour
             if index == 5:
                 currentList = listLetterFive
+
+
+
+            if letter in currentWordContainsLetters:
+                continue
+            
+            currentWordContainsLetters.append(letter)
 
             letterScore = int(str(currentList[letter]))
 

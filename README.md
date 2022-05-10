@@ -3,8 +3,6 @@
 This is a done-in-a-day project i came up with for scoring the best starting word in Wordle (I know I'm late).
 I won't say that this is a perfect way of doing this, but i thought it would be a fun exercise :) 
 
-## What improvments can be done:
-I could add a way to retract some score if a letter apear twice in the same word. I might update the script for this later.
 
 ## What does it do?
 By running the `Script.py` file, you will iterate through the `wordlist.txt` file and give each word a score. \
@@ -43,5 +41,6 @@ s = 10 points,
 Combine these and you get 83 points.
 
 ```
+> EDIT: If the same letter appear twice in a word, the second letter wont account towards the Word Score.
 
 3. Sort this list by Score, and Voila! You have the `Result.txt` file as provided!
