@@ -20,9 +20,8 @@ def createTopLetter(letterDict):
     # newLetterscore = []
     newLetterscore = {}
 
-
     for keys in letterDict:
-            letterscore.append([letterDict[keys], str(keys)])
+        letterscore.append([letterDict[keys], str(keys)])
     newList = sorted(letterscore)
     for index, element in enumerate(newList):
         newLetterscore[element[1]] = index
@@ -32,14 +31,13 @@ def createTopLetter(letterDict):
 
 
 # def scoreLetters():
-    
+
 
 with open("wordlist.txt", "r") as wordlistFile:
 
     wordList = []
     for item in wordlistFile:
         wordList.append(item.strip())
-
 
     for lines in wordList:
         for index, letter in enumerate(lines):
@@ -59,7 +57,6 @@ with open("wordlist.txt", "r") as wordlistFile:
     listLetterThree = createTopLetter(letterDict[2])
     listLetterFour = createTopLetter(letterDict[3])
     listLetterFive = createTopLetter(letterDict[4])
-    
 
     wordHighScore = []
     for lineEntry in wordList:
@@ -79,11 +76,9 @@ with open("wordlist.txt", "r") as wordlistFile:
             if index == 5:
                 currentList = listLetterFive
 
-
-
             if letter in currentWordContainsLetters:
                 continue
-            
+
             currentWordContainsLetters.append(letter)
 
             letterScore = int(str(currentList[letter]))
@@ -92,10 +87,15 @@ with open("wordlist.txt", "r") as wordlistFile:
 
             wordScore = wordScore + letterScore
 
-        wordHighScore.append([str(wordScore).zfill(3), lineEntry, wordScoreArray])
-
+        wordHighScore.append(
+            [str(wordScore).zfill(3), lineEntry, wordScoreArray])
 
     with open("Result.txt", "w+") as Results:
-        sortetHighScore = sorted(wordHighScore, key=lambda x: x[0], reverse=True)
+        sortetHighScore = sorted(
+            wordHighScore, key=lambda x: x[0], reverse=True)
+        # Create CSV header
+        Results.write(
+            'Position, Score, Word, FirstLetterScore, SecondLetterScore, ThirdLetterScore, FourthLetterScore, FifthLetterScore\n')
         for index, line in enumerate(sortetHighScore):
-            Results.write(str(index +1) + ": Score: " + str(line[0]) + "  " + str(line[1]) +"  "+ str(wordScoreArray) + "\n")
+            Results.write(str(index + 1).zfill(5) + ",  " +
+                          str(line[0]) + ",  " + str(line[1]) + ",  " + str(wordScoreArray) + "\n")

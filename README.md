@@ -43,4 +43,4 @@ Combine these and you get 83 points.
 ```
 > EDIT: If the same letter appear twice in a word, the second letter wont account towards the Word Score.
 
-3. Sort this list by Score, and Voila! You have the `Result.txt` file as provided!
+3. Sort this list by Score, and Voila! You have the `Result.csv` file as provided!
