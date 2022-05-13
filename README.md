@@ -5,12 +5,12 @@ I won't say that this is a perfect way of doing this, but i thought it would be 
 
 
 ## What does it do?
-By running the `Script.py` file, you will iterate through the `wordlist.txt` file and give each word a score. \
+By running the `GetBestWord.py` file, you will iterate through the `wordlist.txt` file and give each word a score. \
 This score is based on how many times X letter appear in Y spot.
 
 
 ## How does this work?
-The `Script.py` file does 3 things.
+The `GetBestWord.py` file does 3 things.
 
 1. First it will run through the `wordlist.txt` file and give each letter in X spot a score. <br /> This score is based on how many times this letter appear in X spot. 
 > The score is set from 0 to 25
