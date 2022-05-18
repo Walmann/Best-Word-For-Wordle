@@ -35,7 +35,7 @@ def striken(text):
     return ''.join(chr(822)+t for t in text)
     
 
-with open("wordlistNYTimes.txt", "r") as wordlistFile:
+with open("WordLists/wordlistNYTimes.txt", "r") as wordlistFile:
 
     wordList = []
     for item in wordlistFile:
