@@ -13,18 +13,20 @@ def getResultFileAsList(_ResultFile):
 
 def guessThisWord(guessWord):
     try:
-        print("Previous guesses: ")
-        for entry in DeclinedWords:
-            print(entry)
-        print("\nTry: " + guessWord)
-    except: 
-        print("Error in Script.") 
+        if len(DeclinedWords) >= 1:
+            print("Previous guesses: ")
+            for entry in DeclinedWords:
+                print(entry)
+        print('\n\033[1;30;43m Try this: ' + guessWord + ' \033[0;0m')
+    except:
+        print("Error in Script.")
         exit()
 
-def findFittingWord(RL): #ResultList
+
+def findFittingWord(RL):  # ResultList
     fittingWord = True
     while fittingWord == True:
-    # Find Words fitting green
+        # Find Words fitting green
         for word in RL:
             fittingWord = True
             if word in DeclinedWords:
@@ -37,7 +39,6 @@ def findFittingWord(RL): #ResultList
                     break
             if fittingWord == False:
                 continue
-            
 
             # Check if the word fits the Green Letters
             if len(GreenLetters) > 0:
@@ -46,23 +47,20 @@ def findFittingWord(RL): #ResultList
                     for listGreen in GreenLetters:
                         if x in listGreen[0]:
                             if index in listGreen[1]:
-                                matchesGL +=1
-                                # print("Match on " + x + " Index: " + str(index))
+                                matchesGL += 1
                         continue
-                        
+
                 if matchesGL == len(GreenLetters):
                     pass
-                else: continue
+                else:
+                    continue
 
-            #Create list of indexes Yellow shall ignore. No need to check a space that is supposed to be green
+            # Create list of indexes Yellow shall ignore. No need to check a space that is supposed to be green
             indexesToIgnoreForYellow = []
             for xIndex in GreenLetters:
                 for xxIndex in xIndex[1]:
                     indexesToIgnoreForYellow.append(xxIndex)
-            
-            
-            if word == "canon":
-                print()
+
             # Check if Yellow Letters match:
             if len(YellowLetters) > 0:
                 matchesYL = 0
@@ -71,12 +69,14 @@ def findFittingWord(RL): #ResultList
                     for wordIndex, wordLetter in enumerate(word):
                         if wordLetter in YLEntry[0]:
                             if not wordIndex in YLEntry[1]:
-                                matchesYL +=1
+                                matchesYL += 1
 
                 if matchesYL == len(YellowLetters):
                     pass
-                else: continue
+                else:
+                    continue
             return word
+
 
 def in_nested_list(my_list, item):
     """
@@ -90,14 +90,15 @@ def in_nested_list(my_list, item):
         return any(in_nested_list(sublist, item) for sublist in my_list if isinstance(sublist, list))
 
 
-def setupLettersToList(Type, LL, CL, CW): #Type(String), LetterList, CurrentWord
+# Type(String), LetterList, CurrentList, CurrentWord
+def setupLettersToList(Type, LL, CL, CW):
     returningLL = CL
 
     # Check if LL is empty
     if LL == "":
         return returningLL
-    
-    #Create list
+
+    # Create list
     for letterLL in list(LL):
         for index, letterCW in enumerate(CW):
             if letterLL in letterCW:
@@ -109,36 +110,36 @@ def setupLettersToList(Type, LL, CL, CW): #Type(String), LetterList, CurrentWord
 
     return returningLL
 
+
 with open("Result.txt") as ResultFile:
-    ResultList = getResultFileAsList(ResultFile) 
+    ResultList = getResultFileAsList(ResultFile)
 
     global DeclinedWords
     DeclinedWords = []
     global BlackLetters
     BlackLetters = []
 
-
     GreenLetters = []
-    YellowLetters= []
+    YellowLetters = []
     CorrectGuess = False
-    FirstGuess   = True
-    CurrentWord  = None
+    FirstGuess = True
+    CurrentWord = None
     while CorrectGuess == False:
         _SystemCommands("CLS")
         print("If the answer was correct, just exit the script :)")
-        CurrentWord = findFittingWord(ResultList) #BUG IS the bug in yellowList? #, GreenLetters, list(YellowLetters)
+        CurrentWord = findFittingWord(ResultList)
         guessThisWord(CurrentWord)
 
-        GreenLettersInput = input("If there are several greens, write then as many times! \nWrite All Green Letters: ")
-        GreenLetters = setupLettersToList("Green", GreenLettersInput, GreenLetters, CurrentWord)
-        
-        
-        # YellowLetters = list(input("Write All Yellow Letters?: "))
+        GreenLettersInput = input(
+            "If there are several greens, write then as many times! \nWrite All Green Letters: ")
+        GreenLetters = setupLettersToList(
+            "Green", GreenLettersInput, GreenLetters, CurrentWord)
+
         YellowLettersInput = input("Write All Yellow Letters?: ")
-        YellowLetters = setupLettersToList("Yellow", YellowLettersInput, YellowLetters, CurrentWord)
-        
-       
-        # Remove entries in YellowLetters, if a entry in GreenLetters exist in that index.
+        YellowLetters = setupLettersToList(
+            "Yellow", YellowLettersInput, YellowLetters, CurrentWord)
+
+        # Remove entries in YellowLetters, if an entry in GreenLetters exist in that index.
         for YLIndex, YLEntry in enumerate(YellowLetters):
             for GLEntry in GreenLetters:
                 if GLEntry in YLEntry:
@@ -150,15 +151,13 @@ with open("Result.txt") as ResultFile:
         for letters in CurrentWord:
             if not in_nested_list(GreenLetters, letters):
                 if not in_nested_list(YellowLetters, letters):
-            # if letters not in GreenLetters or letters not in YellowLetters:
+                    # if letters not in GreenLetters or letters not in YellowLetters:
                     BlackLetterThisTurn.append(letters)
                     BlackLetters.append(letters)
         print("Black letters: " + "".join(map(str, BlackLetterThisTurn)))
-        
 
-        # BlackLetters = ["c","r","a"]
-        # GreenLetter example: 
+        # GreenLetter example:
         # GreenLetters = [["e", [4]],["n", [1, 2, 3]]]
 
-
-        DeclinedWords.append(CurrentWord) #Adds Current word to a list of declined words.
+        # Adds Current word to a list of declined words.
+        DeclinedWords.append(CurrentWord)
