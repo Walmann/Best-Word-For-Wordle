@@ -10,19 +10,19 @@ This score is based on how many times X letter appear in Y spot.
 
 ## How does this work?
 
-### GetBestWord.py
+### **GetBestWord.py**
 
 The `GetBestWord.py` file does 3 things.
 
 1. First it will run through the word list file that is set in the script, and give each letter in X spot a score. <br />
-   This score is based on how many times this letter appear in that column (Index).
+   This score is based on how many times this letter appear in that column (Index, starts at 0).
    > The score is set from 0 to 25
 
 </br>
 
 ### **Example:**
 
-| Word           | Index 1       | Index 2                 | Index 3                 | Index 4      | Index 5       |
+| Word           | Index 0       | Index 1                 | Index 2                 | Index 3      | Index 4       |
 | -------------- | ------------- | ----------------------- | ----------------------- | ------------ | ------------- |
 | arose          | A 1           | R 1                     | O 1                     | S 1          | E 1           |
 | adder          | A 1           | D 1                     | D 1                     | E 1          | R 1           |
@@ -51,6 +51,17 @@ Total Score for Caddy: 065
 > Notice how the second D did not count
 
 3. Sort this list by Score, and Voila! You have the `Result.csv` file as provided!
+
+### **GuessTheWord.py**
+
+This script goes through these instructions in a loop:
+
+1.  Find the word that fits the current attributes. An example of this would be; Has to contain a "H" in index 1 (Green Letters), and the letters "E" and "L" somewhere (Yellow letters).
+    - On first run, this is the first entry in `Result.txt`.
+2.  After you enter that word into Wordle, it will ask which letters became green, and which became yellow, and add them to separate lists. The rest of the letters in the current word, get automatically added to it's own list.
+3.  Updates the green and yellow lists, to make sure that there are no yellow entries in the green list.
+4.  For every word it guesses, it will add these to another list, so that we don't get repeated guesses.
+5.  And repeat the loop.
 
 # Which word list too choose?
 
