@@ -1,62 +1,77 @@
 # What is this?
 
-This is a done-in-a-day project i came up with for scoring the best starting word in Wordle (I know I'm late).
-I won't say that this is a perfect way of doing this, but i thought it would be a fun exercise :) 
-
+This is a done-in-a-day-that-became-a-week-or-more project i came up with for scoring the best starting word in Wordle (I know I'm late).
+I won't say that this is a perfect way of doing this, but i thought it would be a fun exercise :)
 
 ## What does it do?
-By running the `GetBestWord.py` file, you will iterate through the `wordlist.txt` file and give each word a score. \
+
+By running the `GetBestWord.py` file, you will iterate through the word list file and give each word a score. \
 This score is based on how many times X letter appear in Y spot.
 
-
 ## How does this work?
+
+### GetBestWord.py
+
 The `GetBestWord.py` file does 3 things.
 
-1. First it will run through the `wordlist.txt` file and give each letter in X spot a score. <br /> This score is based on how many times this letter appear in X spot. 
-> The score is set from 0 to 25
+1. First it will run through the word list file that is set in the script, and give each letter in X spot a score. <br />
+   This score is based on how many times this letter appear in that column (Index).
+   > The score is set from 0 to 25
 
-### Example:
-```
-Short wordlist:
-acers
-adder
-seder
+</br>
 
-In this example "a" in row 1 will get 2 points, as there are 3 ocurences. and "s" will get 1 point.
-The letters "c", "d", and "e" in row 2 all get 1 point.
-The letter "e" will get 2 points etc.
-```
+### **Example:**
 
-2. It will then go through the word list again and rate each word like this:
+| Word           | Index 1       | Index 2                 | Index 3                 | Index 4      | Index 5       |
+| -------------- | ------------- | ----------------------- | ----------------------- | ------------ | ------------- |
+| arose          | A 1           | R 1                     | O 1                     | S 1          | E 1           |
+| adder          | A 1           | D 1                     | D 1                     | E 1          | R 1           |
+| seder          | S 1           | E 1                     | D 1                     | E 1          | R 1           |
+| Total</>Points | A 2 </br> S 1 | R 1 </br> D 1 </br> E 1 | 0 1 </br> D 1 </br> E 1 | S 1 </br>E 2 | E 1 </br> R 2 |
 
-```
-acers
+2. It will then go through all the words and give them a score based on which letters the word consists of.
+   - If the letter contains two or more of the same letter, that letter will only count once.
 
-a = 02 points,
-c = 16 points,
-e = 15 points,
-r = 22 points,
-s = 10 points,
+<!-- | --- | --- | --- | --- | --- |
+| A | R | O | S | E |
+| 19 | 23 | 23 | 22|24| -->
 
-Combine these and you get 83 points.
+| Letters          | A   | R   | O   | S   | E   |
+| ---------------- | --- | --- | --- | --- | --- |
+| Letter</br>Score | 19  | 23  | 23  | 22  | 24  |
 
-```
-> EDIT: If the same letter appear twice in a word, the second letter wont account towards the Word Score.
+Total Score for Arose: 111
+
+| Letters          | C   | A   | D   | D      | Y   |
+| ---------------- | --- | --- | --- | ------ | --- |
+| Letter</br>Score | 23  | 25  | 15  | ~~15~~ | 2   |
+
+Total Score for Caddy: 065
+
+> Notice how the second D did not count
 
 3. Sort this list by Score, and Voila! You have the `Result.csv` file as provided!
 
-# Wich wordlist too choose?
-The original list i used was the `wordlistAllowedGuesses.txt`, but this was changed to `wordlistNYTimes.txt` later. <br />
-But you can use whichever you want.
+# Which word list too choose?
+
+If you are going to use this tool on the NYTimes site, use the `wordlistNYTimes.txt` \
+For all my testing i have used [Infinite Wordle by Greg Cameron](https://gregcameron.com/infinite-wordle/) with the `wordlistInfiniteWordle.txt` file.
 
 # In the future
-Some ideas that can be created at a later date:
-1. ~~A solver that gives advice about wich word you should guess next. <br />
-   This could be done like this:~~
-   - ~~Give the top scorring word as suggestion~~
-   - ~~Ask wich letters became green, yellow, and black (in a for loop or something.)~~
-   - ~~Give next suggestion based on this information.~~
-  
 
-Nothing right now. </br>
-If i get the inspiration, mabye turn it into a webapp?
+Some ideas that can be created at a later date:
+
+1. [x] A solver that gives advice about which word you should guess next. <br />
+       This could be done like this:
+
+   [x] Give the top scoring word as suggestion \
+   [x] Ask which letters became green, yellow, and black (in a for loop or something.) \
+   [x] Give next suggestion based on this information. \
+
+2. [ ] Webapp?
+   1. infinite Wordle, to see exactly how accurate this method is?
+   2. Might be a good way to start learning reactJS?
+3. [ ] Make this more user friendly:
+   1. Select desired word list at beginning
+      - Default selection
+   2. Make suggested words easier to notice inside terminal (Different colors etc.)
